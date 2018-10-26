@@ -22,6 +22,10 @@ pinBCMMap = {'a': 3, 'b': 2, 'c': 4, 'd': 14, 'e': 15, 'f': 17, 'g': 18, 'h': 27
              'i': 26, 'j': 20, 'k': 16, 'l': 19, 'm': 13, 'n': 12, 'o': 6, 'p': 22, 'q': 23,
              'r': 21, 's': 24, 't': 10, 'u': 9, 'v': 25, 'w': 8, 'x': 11, 'y': 7, 'z': 5}
 
+# To fix:
+# Why is letter 'u' so dim?
+# Why is letter y toggling randomly in output mode? (defective board?)
+
 pwms = {}
 
 # for letter, pinNum in pinBCMMap.items():
