@@ -25,6 +25,7 @@ pinBCMMap = {'a': 3, 'b': 2, 'c': 4, 'd': 14, 'e': 15, 'f': 17, 'g': 18, 'h': 27
 # To fix:
 # Why is letter 'u' so dim?
 # Why is letter y toggling randomly in output mode? (defective board?)
+# Can I make J brighter? (It has my custom LED)
 
 pwms = {}
 
@@ -56,7 +57,7 @@ while True:
     for letter in alphabet:
         GPIO.output(pinBCMMap[letter], 1)
         #pwms[pinBCMMap[letter]].ChangeDutyCycle(100)
-        time.sleep(0.01)
+        time.sleep(0.02)
         GPIO.output(pinBCMMap[letter], 0)
         #pwms[pinBCMMap[letter]].ChangeDutyCycle(0)
 
