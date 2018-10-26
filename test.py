@@ -24,8 +24,9 @@ pinBCMMap = {'a': 3, 'b': 2, 'c': 4, 'd': 14, 'e': 15, 'f': 17, 'g': 18, 'h': 27
 
 # To fix:
 # Why is letter 'u' so dim?
-# Why is letter y toggling randomly in output mode? (defective board?)
+# Why is letter y toggling randomly in output mode? (defective board?) This only happens (on wPi 11) if wPi 6 is OFF! WTF??
 # Can I make J brighter? (It has my custom LED)
+# Why does the LED in 'i' flicker or go dim?
 
 pwms = {}
 
@@ -57,7 +58,7 @@ while True:
     for letter in alphabet:
         GPIO.output(pinBCMMap[letter], 1)
         #pwms[pinBCMMap[letter]].ChangeDutyCycle(100)
-        time.sleep(0.02)
+        time.sleep(0.01)
         GPIO.output(pinBCMMap[letter], 0)
         #pwms[pinBCMMap[letter]].ChangeDutyCycle(0)
 
