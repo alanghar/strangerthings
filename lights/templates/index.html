@@ -1,0 +1,15 @@
+{% load static %}
+<html>
+    <head>
+        <title>Pretty Strange</title>
+    </head>
+    <body style="background-image: url('{% static "lightsapp/demogorgon.jpg" %}')">
+        Hello World
+        <form action="/spell/" method="post">
+            {% csrf_token %}
+            <label for="spell">Light message: </label>
+            <input id="spell_text" type="text" name="spell_text" value="">
+            <input type="submit" value="Send">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,5 @@
+django
+pathlib
+channels
+asgi_redis
+RPi.GPIO
