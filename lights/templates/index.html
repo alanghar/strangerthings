@@ -5,12 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style>
         .centervert{
-            width:300px;
-            height:200px;
-            position:absolute;
-            left:50%;
-            top:50%;
-            margin:-100px 0 0 -150px;
+        width: 300px;
+        height: 200px;
+
+        position:absolute; /*it can be fixed too*/
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+
+        /*this to solve "the content will not be cut when the window is smaller than the content": */
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
         }
         </style>
 
@@ -20,9 +26,9 @@
         <div  class="centervert">
         <form action="/spell/" method="post">
             {% csrf_token %}
-            <label for="spell" style="color:white">Light message: </label>
-            <input id="spell_text" type="text" name="spell_text" value="" autofocus=true>
-            <input type="submit" value="Send">
+            <label for="spell" style="color:white; display:block; text-align:center">Speak from the Dark Place: </label><br>
+            <input id="spell_text" type="text" name="spell_text" value="" autofocus=true style="width:90%; margin: auto; display:block"><br>
+            <input type="submit" value="Send" style="display:block; margin:5px auto">
         </form>
     </div>
     </body>

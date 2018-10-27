@@ -50,7 +50,7 @@ class LightManager:
             sleeptime =  (0.3 + (random.random() * 3))
             if(random.random() > 0.3):
                 self.pwms[letter].ChangeDutyCycle(0)
-                time.sleep(sleeptime)
+                self.sleepUnless(sleeptime, lambda: not self.current_phrase)
             else:
                 brightness_start = random.random() * 100
                 brightness_end = random.random() * 100
@@ -64,6 +64,7 @@ class LightManager:
                     self.current_phrase = self.spell_queue.popleft()
                     while self.sparkle_pause_count != len(self.pwms.keys()):
                         time.sleep(0.05)
+                    print("sparkle count complete")
 
                     for letter, pin in self.pinBCMMap.items():
                         self.pwms[letter].stop()
@@ -118,6 +119,14 @@ class LightManager:
         self.setall(0)
         time.sleep(1)
 
+    def sleepUnless(self, duration_sec, conditional):
+        start = time.time()
+        while conditional() and datetime.timedelta(milliseconds=(time.time() - start)*1000.0) < datetime.timedelta(seconds=duration_sec) and not self.current_phrase:
+            elapsed = time.time() - start
+            if elapsed > duration_sec:
+                continue
+            time.sleep(0.05)
+
     def rampBrightnessLinear(self, pwm, start_brightness, end_brightness, duration_sec):
         start = time.time()
         while datetime.timedelta(milliseconds=(time.time() - start)*1000.0) < datetime.timedelta(seconds=duration_sec) and not self.current_phrase:
@@ -141,7 +150,7 @@ class LightManager:
                 continue
             GPIO.output(self.pinBCMMap[letter], 1)
             #pwms[pinBCMMap[letter]].ChangeDutyCycle(100)
-            time.sleep(1.5)
+            time.sleep(1.5 + (random.random() - 0.5))
             GPIO.output(self.pinBCMMap[letter], 0)
 
             # Add pause for repeated letters
