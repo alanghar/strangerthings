@@ -14,5 +14,5 @@ def homepageview(request):
 def spellview(request):
     text = request.POST.get('spell_text')
     lm = LightManager.getInstance()
-    lm.spell(text)
+    lm.enqueuePhrase(text)
     return redirect(homepageview)
