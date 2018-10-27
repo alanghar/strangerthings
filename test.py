@@ -1,4 +1,5 @@
 import time
+import sys
 import datetime
 import random
 import RPi.GPIO as GPIO
@@ -20,21 +21,22 @@ alphabet = 'abcdefghijklmnopqrstuvwxyz'
 
 pinBCMMap = {'a': 3, 'b': 2, 'c': 4, 'd': 14, 'e': 15, 'f': 17, 'g': 18, 'h': 27,
              'i': 26, 'j': 20, 'k': 16, 'l': 19, 'm': 13, 'n': 12, 'o': 6, 'p': 22, 'q': 23,
-             'r': 21, 's': 24, 't': 10, 'u': 9, 'v': 25, 'w': 8, 'x': 11, 'y': 7, 'z': 5}
+             'r': 21, 's': 24, 't': 10, 'u': 9, 'v': 25, 'w': 8, 'x': 11, 'y': 0, 'z': 5}
 
 # To fix:
 # Why is letter 'u' so dim?
-# Why is letter y toggling randomly in output mode? (defective board?) This only happens (on wPi 11) if wPi 6 is OFF! WTF??
 # Can I make J brighter? (It has my custom LED)
 # Why does the LED in 'i' flicker or go dim?
 
 pwms = {}
 
-# for letter, pinNum in pinBCMMap.items():
-#     GPIO.setup(pinNum, GPIO.OUT)
-for x in xrange(32):
+for x in pinBCMMap.values():
     p = GPIO.setup(x, GPIO.OUT)
     GPIO.output(x, 0)
+
+#GPIO.cleanup()
+#sys.exit()
+
 # num = 28
 # GPIO.setup(num, GPIO.OUT)
 # p = GPIO.PWM(num, 10)
@@ -42,7 +44,7 @@ for x in xrange(32):
 
 
 # for letter, pinNum in pinBCMMap.items():
-#     freq = 1000
+#     freq = 10
 #     duty = 0
 #     GPIO.setup(pinNum, GPIO.OUT)
 #     pwms[pinNum] = GPIO.PWM(pinNum, freq)
